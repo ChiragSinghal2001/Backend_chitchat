@@ -7,12 +7,7 @@ const app = express();
 const socket = require("socket.io");
 require("dotenv").config();
 
-const io = socket(server, {
-  cors: {
-    origin: "*",
-    credentials: true,
-  },
-});
+
 // Enable CORS for all routes
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -20,6 +15,12 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.header('Access-Control-Allow-Credentials', true);
   next();
+});
+const io = socket(server, {
+  cors: {
+    origin: "*",
+    credentials: true,
+  },
 });
 // app.use(cors());
 app.use(express.json());
