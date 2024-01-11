@@ -9,12 +9,15 @@ require("dotenv").config();
 
 
 // Enable CORS for all routes
-const corsOptions ={
-  origin:'*', 
-  credentials:true,            
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods','POST, PUT, PATCH, GET, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', '*');
+  next();
+});
+
+
+// app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/", (req, res) => {
