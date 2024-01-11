@@ -1,4 +1,5 @@
 const {
+  check,
   login,
   register,
   getAllUsers,
@@ -8,6 +9,7 @@ const {
 
 const router = require("express").Router();
 
+router.post("/check", check);
 router.post("/login", login);
 router.post("/register", register);
 router.get("/allusers/:id", getAllUsers);

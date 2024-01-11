@@ -17,11 +17,8 @@ const corsOptions ={
 app.use(cors(corsOptions));
 app.use(express.json());
 
-const io = socket(server, {
-  cors: {
-    origin: "*",
-    credentials: true,
-  },
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server is running successfully!" });
 });
 
 mongoose
@@ -47,6 +44,12 @@ const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
 
+const io = socket(server, {
+  cors: {
+    origin: "*",
+    credentials: true,
+  },
+});
 
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {

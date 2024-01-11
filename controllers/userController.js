@@ -1,6 +1,10 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 
+module.exports.check=()=>{
+  console.log("Success")
+}
+
 module.exports.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
