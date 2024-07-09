@@ -9,13 +9,14 @@ require("dotenv").config();
 
 
 // Enable CORS for all routes
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods','POST, PUT, PATCH, GET, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', '*');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Access-Control-Allow-Origin', '*');
+//   res.setHeader('Access-Control-Allow-Methods','POST, PUT, PATCH, GET, DELETE, OPTIONS');
+//   res.setHeader('Access-Control-Allow-Headers', '*');
+//   res.setHeader('Access-Control-Allow-Credentials', 'true');
+//   next();
+// });
+app.use(cors());
 
 
 // app.use(cors(corsOptions));

@@ -9,11 +9,12 @@ module.exports.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
-    if (!user)
-      return res.json({ msg: "Incorrect Username or Password", status: false });
+    if (!user){
+    console.log("user not found");
+      return res.json({ msg: "Incorrect Username or Password", status: false });}
     const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid)
-      return res.json({ msg: "Incorrect Username or Password", status: false });
+    if (!isPasswordValid){
+      return res.json({ msg: "Incorrect Username or Password", status: false });}
     delete user.password;
     return res.json({ status: true, user });
   } catch (ex) {
@@ -56,7 +57,7 @@ module.exports.getAllUsers = async (req, res, next) => {
     next(ex);
   }
 };
-
+// need to check how we get id using params
 module.exports.setAvatar = async (req, res, next) => {
   try {
     const userId = req.params.id;
