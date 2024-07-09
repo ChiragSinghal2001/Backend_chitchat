@@ -16,7 +16,12 @@ require("dotenv").config();
 //   res.setHeader('Access-Control-Allow-Credentials', 'true');
 //   next();
 // });
-app.use(cors());
+const corsOrigin ={
+  origin: '*', //or whatever port your frontend is using
+  credentials:true,            
+  optionSuccessStatus:200
+}
+app.use(cors(corsOrigin));
 
 
 // app.use(cors(corsOptions));
