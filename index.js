@@ -16,12 +16,28 @@ require("dotenv").config();
 //   res.setHeader('Access-Control-Allow-Credentials', 'true');
 //   next();
 // });
-const corsOrigin ={
-  origin: '*', //or whatever port your frontend is using
-  credentials:true,            
-  optionSuccessStatus:200
-}
-app.use(cors(corsOrigin));
+// const corsOrigin ={
+//   origin: '*', //or whatever port your frontend is using
+//   credentials:true,            
+//   optionSuccessStatus:200
+// }
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://chatbuddy4.netlify.app",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 
 // app.use(cors(corsOptions));
@@ -54,9 +70,22 @@ const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
 
+// const io = socket(server, {
+//   cors: {
+//     origin: "*",
+//     credentials: true,
+//   },
+// });
+
 const io = socket(server, {
   cors: {
-    origin: "*",
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   },
 });
