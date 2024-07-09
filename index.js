@@ -90,6 +90,9 @@ const io = socket(server, {
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     methods: ["GET", "POST", "PUT", "DELETE"]
   },
+  path: '/socket.io', 
+  transports: ['websocket'], 
+  secure: true, 
 });
 
 // const io = socket(server, {
