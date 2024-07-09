@@ -91,7 +91,7 @@ const io = socket(server, {
     methods: ["GET", "POST", "PUT", "DELETE"]
   },
   path: '/socket.io', 
-  transports: ['websocket'], 
+  transports: ['websocket','polling'], 
   secure: true, 
 });
 
