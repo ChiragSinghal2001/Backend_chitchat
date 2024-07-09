@@ -31,9 +31,11 @@ require("dotenv").config();
 //   next();
 // });
 const corsOptions ={
-  origin: '*', 
-  credentials:true,            
-  optionSuccessStatus:200
+  origin: 'http://localhost:3000', 
+  credentials:true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],           
+  optionSuccessStatus:200,
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }
 
 
@@ -85,7 +87,8 @@ const io = socket(server, {
   cors: {
     origin: "http://localhost:3000",
     credentials: true,
-    methods: ["GET", "POST"]
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    methods: ["GET", "POST", "PUT", "DELETE"]
   },
 });
 
