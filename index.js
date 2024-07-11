@@ -16,10 +16,10 @@ require("dotenv").config();
 //   res.setHeader('Access-Control-Allow-Credentials', 'true');
 //   next();
 // });
-// const allowedOrigins = [
-//   "http://localhost:3000",
-//   "https://chatbuddy4.netlify.app",
-// ];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://chatbuddy4.netlify.app",
+];
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', allowedOrigins);
@@ -31,7 +31,7 @@ require("dotenv").config();
 //   next();
 // });
 const corsOptions ={
-  origin: 'http://localhost:3000', 
+  origin: allowedOrigins, 
   credentials:true, 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],           
   optionSuccessStatus:200,
@@ -85,7 +85,7 @@ const server = app.listen(process.env.PORT, () =>
 
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: allowedOrigins,
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     methods: ["GET", "POST", "PUT", "DELETE"]
