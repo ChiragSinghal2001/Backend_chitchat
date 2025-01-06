@@ -12,8 +12,8 @@ const verifyToken = (req, res, next) => {
       (req.headers.authorization && req.headers.authorization.split(" ")[1]);
 
     if (!token) {
-      return res.redirect("/login");
-      // return res.status(401).json({ msg: "Access Denied: No Token Provided" });
+      // return res.redirect("/login");
+      return res.status(401).json({ msg: "Access Denied: No Token Provided" });
     }
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
