@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser"); 
 const authRoutes = require("./routes/auth");
 const messageRoutes = require("./routes/messages");
 const app = express();
@@ -19,6 +20,7 @@ require("dotenv").config();
 const allowedOrigins = [
   "http://localhost:3000",
   "https://chatbuddy4.netlify.app",
+  "*",
 ];
 
 // app.use((req, res, next) => {
@@ -35,7 +37,7 @@ const corsOptions ={
   credentials:true, 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],           
   optionSuccessStatus:200,
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
 }
 
 
@@ -54,7 +56,9 @@ app.use(cors(corsOptions));
 
 
 // app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 
 app.get("/", (req, res) => {
   res.status(200).json({ message: "Server is running successfully!" });
